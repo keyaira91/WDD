@@ -8,12 +8,14 @@
         <span class="text-info">Title: </span><span>{{ details }}</span><br>
         <span class="text-info">Publisher: </span><span>{{ details.publisher }}</span><br>
         <span class="text-info">Publication Date: </span><span>{{ details.publication_date }}</span><br>
-        <span class="text-info">Overall Rating: </span><span class="badge badge-pill badge-primary">{{ details.rating }}</span><br>
+        {% if not reviews %}
+            <hr>
+            <h3>Be the first one to write a review.</h3>
+        {% else %}
+        <span class="text-info">Overall Rating: </span><span class="badge badge-pill badge-primary">{{ book_rating }}</span><br>
     </li>
-    
 </ul>
 <br>
-
 <h3>Review Comments</h3>
 <ul class="list-group">
     {% for comment in comments %}
@@ -26,5 +28,5 @@
     </li>
     {% endfor %}
 </ul>
-
+{% endif %}
 {% endblock content %}

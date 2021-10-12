@@ -28,5 +28,20 @@ def book_details(request, details_id):
     # details = Book.objects.get(id=details_id)
     details = get_object_or_404(Book, id=details_id)
     comments = details.review_set.order_by('date_created')
-    context = {'details': details, 'comments': comments}
-    return render(request, 'book_details.html', context)
+    reviews = details.review_set.all()
+    if reviews:
+        book_rating = average_rating([review.rating for review in reviews])
+        context = {
+            "details": details,
+            "book_rating": book_rating,
+            "comments": comments,
+            "reviews": reviews
+        }
+    else:
+        context = {
+            "details": details,
+            "book_rating": None,
+            "comments": None, 
+            "reviews": None
+        }
+    return render(request, "book_details.html", context)
