@@ -5,7 +5,7 @@ from .utils import average_rating
 
 def welcome_view(request):
     # message = f"<html><h1>Welcome to Bookr!</h1> <p>{Book.objects.count()} books and counting!</p></html>"
-    return render(request, 'base.html')
+    return render(request, 'reviews/base.html')
 
 def book_list(request):
     books = Book.objects.all()
@@ -22,7 +22,7 @@ def book_list(request):
                     'book_rating': book_rating,\
                     'number_of_reviews': number_of_reviews})
     context = {'book_list': book_list}
-    return render(request, 'book_list.html', context)
+    return render(request, 'reviews/book_list.html', context)
 
 def book_details(request, details_id):
     # details = Book.objects.get(id=details_id)
@@ -44,4 +44,4 @@ def book_details(request, details_id):
             "comments": None, 
             "reviews": None
         }
-    return render(request, "book_details.html", context)
+    return render(request, 'reviews/book_details.html', context)
